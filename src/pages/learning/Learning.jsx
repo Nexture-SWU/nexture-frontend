@@ -172,7 +172,7 @@ const Learning = () => {
                         key={index}
                         onClick={
                           item.chatId
-                          ? () => navigate(`${item.progress===null?"reflection":"chat"}/${item.chatId}`)
+                          ? () => navigate(`${item.progress===null?item.active?"reflection":"report":"chat"}/${item.chatId}`)
                           : undefined
                         }
                         sx={{
