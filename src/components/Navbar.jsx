@@ -82,7 +82,7 @@ const Navbar = () => {
               sx={{ cursor: 'pointer', whiteSpace: 'nowrap' }}
               className='subtitle-18-medium'
             >
-              학습
+              학습 목록
             </Typography> : <></>}
             {/* <Typography
               onClick={() => navigate(PATH.PROGRESS)}
@@ -98,7 +98,7 @@ const Navbar = () => {
               sx={{ cursor: 'pointer', whiteSpace: 'nowrap' }}
               className='subtitle-18-medium'
             >
-              아티클
+              자료 게시판
             </Typography>
           </Box>
 
