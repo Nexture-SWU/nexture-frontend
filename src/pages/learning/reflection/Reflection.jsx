@@ -14,7 +14,9 @@ import { formatDateYMD, getCreateDate } from "../../../utils/date";
 function Reflection() {
   const { chatId } = useParams()
   const {
-      loading
+      loading,
+      reflection,
+      createReflection
     } = useReflection(chatId);
 
   return (
