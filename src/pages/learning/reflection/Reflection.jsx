@@ -1,39 +1,57 @@
-import {
-  Container
-} from "@mui/material";
+import { Container } from "@mui/material";
 import { useParams } from "react-router-dom";
 
-import NavbarComponent from '../../../components/Navbar';
-import Footer from '../../../components/Footer';
+import NavbarComponent from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
+import LoadingScreen from "../../../components/LoadingScreen";
 
-import { useReflection } from '../../../hooks/useReflection';
-import ReflectionTable from './ReflectionTable';
-import LoadingScreen from '../../../components/LoadingScreen';
-import MainContainer from "../../../components/MainContainer";
-import { formatDateYMD, getCreateDate } from "../../../utils/date";
+import { useReflection } from "../../../hooks/useReflection";
+import ReflectionTable from "./ReflectionTable";
+import ReflectionCreateTable from "./ReflectionCreateTable";
 
 function Reflection() {
-  const { chatId } = useParams()
+  const { chatId } = useParams();
+
   const {
-      loading,
-      reflection,
-      createReflection
-    } = useReflection(chatId);
+    loading,
+    reflection,
+    createReflection,
+  } = useReflection(chatId);
+
+  if (loading) {
+    return (
+      <Container maxWidth={false} sx={{ backgroundColor: "var(--background-color)",
+        p: 0,
+        overflow: "hidden", }}>
+        <NavbarComponent />
+        <LoadingScreen />
+        <Footer />
+      </Container>
+    );
+  }
+
+  const isCreateMode = !reflection;
 
   return (
     <Container
       maxWidth={false}
-      style={{
+      sx={{
         backgroundColor: "var(--background-color)",
-        height: "auto",
-        padding: "0",
-        overflow: "hidden"
+        p: 0,
+        overflow: "hidden",
       }}
     >
-      {loading && <LoadingScreen />}
       <NavbarComponent />
-        <MainContainer>
-        </MainContainer>
+
+      {isCreateMode ? (
+        <ReflectionCreateTable createReflection={createReflection} />
+      ) : (
+        <ReflectionTable
+          reflection={reflection}
+          createReflection={createReflection}
+        />
+      )}
+
       <Footer />
     </Container>
   );
