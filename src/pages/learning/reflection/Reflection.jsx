@@ -7,6 +7,7 @@ import NavbarComponent from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 
 import { useReflection } from '../../../hooks/useReflection';
+import ReflectionTable from './ReflectionTable';
 import LoadingScreen from '../../../components/LoadingScreen';
 import MainContainer from "../../../components/MainContainer";
 import { formatDateYMD, getCreateDate } from "../../../utils/date";
