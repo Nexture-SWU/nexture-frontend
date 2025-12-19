@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getChatList } from "../api/chat";
+import { creatChatId, getChatList } from "../api/chat";
 import { getFinalReportList } from "../api/report";
 import { getCurriculumList } from "../api/curriculum";
 
@@ -34,6 +34,13 @@ export function useProgress(user) {
       setChatList(chats["chats"]||[]);
       setCurriculumList(curriculums["curriculums"]||[]);
       setFinalReportList(finalReports["final_reports"]||[]);
+
+      let tmp = chats["chats"]||[]
+      if (tmp.length === 0) {
+        await safeCall(() =>creatChatId())
+        const newChats = await safeCall(() => getChatList());
+        setChatList(newChats["chats"]||[]);
+      }
 
       setLoading(false);
     };
