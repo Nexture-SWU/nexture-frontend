@@ -76,14 +76,14 @@ const Navbar = () => {
         >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 5 }}>
             <img src={`${process.env.PUBLIC_URL}/images/default/logo.png`} alt="Logo" style={{ cursor: 'pointer', height: 18 }} onClick={() => navigate(PATH.MAIN)}/>
-            <Typography
+            {user ? <Typography
               onClick={() => navigate(PATH.LEARNING)}
               variant="body2"
               sx={{ cursor: 'pointer', whiteSpace: 'nowrap' }}
               className='subtitle-18-medium'
             >
-              학습
-            </Typography>
+              학습 목록
+            </Typography> : <></>}
             {/* <Typography
               onClick={() => navigate(PATH.PROGRESS)}
               variant="body2"
@@ -98,7 +98,7 @@ const Navbar = () => {
               sx={{ cursor: 'pointer', whiteSpace: 'nowrap' }}
               className='subtitle-18-medium'
             >
-              아티클
+              자료 게시판
             </Typography>
           </Box>
 

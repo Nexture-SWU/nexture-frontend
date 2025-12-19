@@ -257,7 +257,7 @@ export default function Progress({ user, onNavigate }) {
                     borderColor: 'var(--color-blue-400)',
                     backgroundColor: 'var(--color-blue-400)',
                   },}}
-                onClick={() => onNavigate(`/learning/${chatList.length > 0 ? chatList[0].current_question_index === null? `reflection/${chatList[0].chat_id}` : `chat/${chatList[0].chat_id}`: ""}`)}
+                onClick={() => onNavigate(`/learning/${chatList.length > 0 ? chatList[0].current_question_index === null? `reflection/${chatList[0].chat_id}` : Number(chatList[0].current_question_index) === 0? `reading/${chatList[0].chat_id}` : `chat/${chatList[0].chat_id}`: ""}`)}
               >
                 수강하기
               </Button>
@@ -401,7 +401,7 @@ export default function Progress({ user, onNavigate }) {
                 <TableCell align="center">
                   <Button
                     size="small"
-                    onClick={()=>onNavigate(`/learning/${chat.current_question_index === null?"reflection":"chat"}/${chat.chat_id}`)}
+                    onClick={() => onNavigate(`/learning/${chat.current_question_index === null? `reflection/${chat.chat_id}` : Number(chat.current_question_index) === 0? `reading/${chat.chat_id}` : `chat/${chat.chat_id}`}`)}
                     variant={"outlined"}
                     disabled={chat.has_final_report}
                     sx={{ 
