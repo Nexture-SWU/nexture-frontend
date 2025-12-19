@@ -14,14 +14,19 @@ function Reflection() {
 
   const {
     loading,
+    book,
     reflection,
     createReflection,
+    createFinalReport
   } = useReflection(chatId);
 
   if (loading) {
     return (
-      <Container maxWidth={false} sx={{ backgroundColor: "var(--background-color)",
-        p: 0,
+      <Container maxWidth={false} 
+      style={{ 
+        backgroundColor: "var(--background-color)",
+        height: "auto",
+        padding: 0,
         overflow: "hidden", }}>
         <NavbarComponent />
         <LoadingScreen />
@@ -35,20 +40,22 @@ function Reflection() {
   return (
     <Container
       maxWidth={false}
-      sx={{
+      style={{
         backgroundColor: "var(--background-color)",
-        p: 0,
+        height: "auto",
+        padding: 0,
         overflow: "hidden",
       }}
     >
       <NavbarComponent />
 
       {isCreateMode ? (
-        <ReflectionCreateTable createReflection={createReflection} />
+        <ReflectionCreateTable book={book} createReflection={createReflection} />
       ) : (
         <ReflectionTable
+          book={book}
           reflection={reflection}
-          createReflection={createReflection}
+          createFinalReport={createFinalReport}
         />
       )}
 

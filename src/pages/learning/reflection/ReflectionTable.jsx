@@ -12,7 +12,7 @@ import {
 import MainContainer from "../../../components/MainContainer";
 import { formatDateYMD, getCreateDate } from "../../../utils/date";
 
-export default function ReflectionTable({reflection}) {
+export default function ReflectionTable({book, reflection, createFinalReport}) {
   const InfoTable = ({ rows }) => {
   let lastGroup = null;
 
@@ -101,11 +101,12 @@ export default function ReflectionTable({reflection}) {
       {/* 헤더 */}
       <Stack direction="row" justifyContent="space-between" mb={4}>
         <Typography fontSize={28} fontWeight={700} sx={{ mb: 1 }}>
-          {finalReport.title} <span style={{ color: "var(--color-gray-700)", fontSize: "24px" }}>- {finalReport.author}</span>
+          {reflection.title}
         </Typography>
 
         <Stack direction="row" spacing={2}>
           <Button variant="outlined" 
+          onClick={createFinalReport}
           sx={{
             borderColor: 'var(--color-blue-200)',
             color: 'var(--color-blue-500)',
@@ -118,21 +119,7 @@ export default function ReflectionTable({reflection}) {
             '&:hover': {
             borderColor: 'var(--color-blue-200)',
             backgroundColor: 'var(--color-blue-100)',
-                      },}}>공유하기</Button>
-          <Button variant="outlined" 
-          sx={{
-            borderColor: 'var(--color-blue-200)',
-            color: 'var(--color-blue-500)',
-            backgroundColor: 'var(--color-blue-050)',
-            fontWeight: 700,
-            fontSize: 16,
-            borderRadius: '8px',
-            paddingX: "20px",
-            paddingY: "10px",
-            '&:hover': {
-            borderColor: 'var(--color-blue-200)',
-            backgroundColor: 'var(--color-blue-100)',
-                      },}}>내보내기</Button>
+                      },}}>다음으로</Button>
         </Stack>
       </Stack>
 
@@ -146,7 +133,7 @@ export default function ReflectionTable({reflection}) {
                 {
                 label: "제목",
                 value: `${reflection.title}`,
-                extra: { label: "저자", value: `${reflection.author}` },
+                extra: { label: "저자", value: `${book.author}` },
                 },
                 {
                 label: "날짜",
