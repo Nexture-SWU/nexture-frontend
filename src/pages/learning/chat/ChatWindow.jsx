@@ -5,6 +5,7 @@ import MainContainer from "../../../components/MainContainer";
 
 function ChatWindow({ isSidebarOpen, handleSend, preChat, navigate, chatId }) {
   const [messages, setMessages] = useState([]);
+  const [isChatDone, setIsChatDone] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const bottomRef = useRef(null);
 
@@ -36,11 +37,19 @@ function ChatWindow({ isSidebarOpen, handleSend, preChat, navigate, chatId }) {
         role: 'assistant',
       };
 
+      
       setMessages(prev => [...prev, aiMessage]);
+
     } catch (e) {
       console.error("AI 응답 오류:", e);
     }
   };
+
+  useEffect(() => {
+    if (messages.length >= 5) {
+      setIsChatDone(true);
+    }
+  }, [messages]);
 
   // preChat이 변경될 때 메시지 세팅
   useEffect(() => {
@@ -101,7 +110,7 @@ function ChatWindow({ isSidebarOpen, handleSend, preChat, navigate, chatId }) {
           <div ref={bottomRef} />
         </div>
 
-        {messages.length<6?
+        {!isChatDone?
         (<div className="chat-input-area">
           <input
             type="text"
@@ -125,7 +134,7 @@ function ChatWindow({ isSidebarOpen, handleSend, preChat, navigate, chatId }) {
             height: '52px',
             width: "800px",
             textTransform: 'none',
-            mb: "60px",
+            mb: "20px",
             '&:hover': {
               borderColor: 'var(--color-blue-400)',
             backgroundColor: 'var(--color-blue-400)',
