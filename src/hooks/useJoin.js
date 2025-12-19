@@ -8,7 +8,7 @@ export const useJoin = () => {
   const navigate = useNavigateWithScrollTop();
   
   const onSuccess = () => {
-    navigate('/join?step=');
+    navigate('/login');
   }
   const [formData, setFormData] = useState({
     id: getItem("id") || '',

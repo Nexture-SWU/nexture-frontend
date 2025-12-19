@@ -6,6 +6,7 @@ import NavbarComponent from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { useJoin } from '../../hooks/useJoin';
 import { useNavigateWithScrollTop } from '../../hooks/useNavigateWithScrollTop';
+import MainContainer from '../../components/MainContainer';
 import './Join.css';
 
 const Join = () => {
@@ -21,7 +22,7 @@ const Join = () => {
     if (step === '1') {
       return (
         <Box className="join-wrapper" sx={{ maxWidth: 640, mx: 'auto', py: 4 }}>
-          <Typography variant="h4" component="h1" className="join-title" sx={{ mb: 2 }}>
+          <Typography variant="h4" component="h1" sx={{ mb: 4, fontWeight: 'bold', fontSize: '32px', color: 'var(--color-base-900)' }}>
             회원가입
           </Typography>
 
@@ -36,6 +37,35 @@ const Join = () => {
               error={!!errors.id}
               helperText={errors.id}
               autoComplete="username"
+              sx={{
+              mb: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'flex-start',
+              height: '56px',
+              fontSize: "16px",
+              '& .MuiOutlinedInput-root': {
+                height: '100%',
+                boxSizing: 'border-box',
+                borderRadius: "8px",
+                padding: 0,
+                outline: 'none',
+                boxShadow: 'none',
+                '& input': {
+                  padding: '16px 12px',
+                  fontSize: '18px'
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'var(--color-blue-400)',
+                  borderWidth: '2px',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'var(--color-blue-400)',
+                  borderWidth: '2px',
+                },
+              }
+            }}
             />
 
             <TextField
@@ -49,6 +79,35 @@ const Join = () => {
               error={!!errors.password}
               helperText={errors.password}
               autoComplete="new-password"
+              sx={{
+              mb: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'flex-start',
+              height: '56px',
+              fontSize: "16px",
+              '& .MuiOutlinedInput-root': {
+                height: '100%',
+                boxSizing: 'border-box',
+                borderRadius: "8px",
+                padding: 0,
+                outline: 'none',
+                boxShadow: 'none',
+                '& input': {
+                  padding: '16px 12px',
+                  fontSize: '18px'
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'var(--color-blue-400)',
+                  borderWidth: '2px',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'var(--color-blue-400)',
+                  borderWidth: '2px',
+                },
+              }
+            }}
             />
 
             <TextField
@@ -61,6 +120,35 @@ const Join = () => {
               margin="normal"
               error={!!errors.confirmPassword}
               helperText={errors.confirmPassword}
+              sx={{
+              mb: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'flex-start',
+              height: '56px',
+              fontSize: "16px",
+              '& .MuiOutlinedInput-root': {
+                height: '100%',
+                boxSizing: 'border-box',
+                borderRadius: "8px",
+                padding: 0,
+                outline: 'none',
+                boxShadow: 'none',
+                '& input': {
+                  padding: '16px 12px',
+                  fontSize: '18px'
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'var(--color-blue-400)',
+                  borderWidth: '2px',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'var(--color-blue-400)',
+                  borderWidth: '2px',
+                },
+              }
+            }}
             />
 
             <TextField
@@ -72,6 +160,35 @@ const Join = () => {
               margin="normal"
               error={!!errors.name}
               helperText={errors.name}
+              sx={{
+              mb: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'flex-start',
+              height: '56px',
+              fontSize: "16px",
+              '& .MuiOutlinedInput-root': {
+                height: '100%',
+                boxSizing: 'border-box',
+                borderRadius: "8px",
+                padding: 0,
+                outline: 'none',
+                boxShadow: 'none',
+                '& input': {
+                  padding: '16px 12px',
+                  fontSize: '18px'
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'var(--color-blue-400)',
+                  borderWidth: '2px',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'var(--color-blue-400)',
+                  borderWidth: '2px',
+                },
+              }
+            }}
             />
 
             <FormLabel component="legend" sx={{ mt: 2 }}>
@@ -95,7 +212,17 @@ const Join = () => {
               fullWidth
               disabled={loading}
               className="join-submit"
-              sx={{ mt: 2 }}
+              sx={{
+              mt: 2,
+              height: '56px',
+              borderRadius: '8px',
+              fontSize: "18px",
+              backgroundColor: 'var(--color-blue-500)',
+              color: 'var(--color-base-000)',
+              '&:hover': {
+                backgroundColor: 'var(--color-blue-400)',
+              }
+            }}
             >
               {loading ? '가입 중...' : '다음 단계'}
             </Button>
@@ -140,14 +267,20 @@ const Join = () => {
       maxWidth={false}
       disableGutters
       style={{
-        minHeight: '100vh',
-        paddingTop: 120,
+        height: 'auto',
+        backgroundColor: 'var(--background-color)',
+        padding: 0,
+        overflowX: 'hidden',
       }}
     >
       <NavbarComponent />
-
+      <MainContainer
+      style={{
+        height: '100vh',
+        paddingTop: 120,
+      }}>
       {renderStep()}
-
+      </MainContainer>
       <Footer />
     </Container>
   );
