@@ -54,11 +54,13 @@ export function useReflection(chatId) {
     async (reflectionData) => {
       try {
         setLoading(true);
-        const data = await creatReflection(chatId, reflectionData);
-        if (data) {
-          setReflection(data);
+        const reply = await creatReflection(chatId, reflectionData);
+        if (reply) {
+          const data = await safeCall(() =>getReflection(chatId));
+          setReflection(data["book_report"] || null);
+          navigate(`/learning/reflection/${chatId}`);
         }
-        return data;
+        return null;
       } catch (err) {
         setError(err);
         return null;
