@@ -30,19 +30,12 @@ const ArticleDetail = () => {
       <MainContainer>
         <Box
           sx={{ 
-            padding: "16px 320px",
+            padding: "16px 400px",
             display: "flex",
             flexDirection: "column",
             gap: 2
            }}
         >
-          {/* 이미지 */}
-          <img 
-            src={article.thumbnail}
-            alt={article.title}
-            style={{ width: "100%", borderRadius: "16px" }}
-          />
-
           {/* 제목 및 저자 */}
            <Box sx={{ display: "flex", flexDirection: "column", gap: "4px" }}>
             {/* 제목*/}
@@ -55,8 +48,16 @@ const ArticleDetail = () => {
             </Typography>
            </Box>
 
+          {/* 이미지 */}
+          <img 
+            src={article.thumbnail}
+            alt={article.title}
+            style={{ width: "100%", borderRadius: "16px", marginBottom: "16px" }}
+          />
+
            {/* 내용 */}
-            <Typography variant="body2" fontWeight={400} fontSize="18px" lineHeight="28px" color="var(--color-gray-700)">
+            <Typography variant="body2" fontWeight={400} fontSize="18px" lineHeight="28px" color="var(--color-gray-700)"
+              sx={{ mb: 1 }}>
               {article.contents}
             </Typography>
         </Box>
