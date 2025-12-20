@@ -9,7 +9,7 @@ export default function ServiceInfo({onNavigate}){
     return (
         <MainContainer sx={{height: '80vh'}}>
           <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%'}}>
-            <Typography sx={{fontSize: '28px', fontWeight: 600, mb: 1, color: 'var(--color-gray-500)'}}>AI와 함께 추론하고, 책을 읽어요</Typography>
+            <Typography sx={{fontSize: '28px', fontWeight: 400, mb: 1, color: 'var(--color-gray-500)'}}>AI와 함께 추론하고, 책을 읽어요</Typography>
             <Typography sx={{fontSize: '48px', fontWeight: 700, color: 'var(--color-blue-500)'}}>독서아이</Typography>
           </Box>
         </MainContainer>
