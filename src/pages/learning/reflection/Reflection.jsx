@@ -50,12 +50,13 @@ function Reflection() {
       <NavbarComponent />
 
       {isCreateMode ? (
-        <ReflectionCreateTable book={book} createReflection={createReflection} />
+        <ReflectionCreateTable book={book} createReflection={createReflection} chatId={chatId} />
       ) : (
         <ReflectionTable
           book={book}
           reflection={reflection}
           createFinalReport={createFinalReport}
+          chatId={chatId}
         />
       )}
 

@@ -30,7 +30,7 @@ function Report() {
     >
       {loading && <LoadingScreen />}
       <NavbarComponent />
-      <ReportTable reflection={reflection} finalReport={finalReport}></ReportTable>      
+      <ReportTable reflection={reflection} finalReport={finalReport} chatId={chatId}></ReportTable>      
       <Footer />
     </Container>
   );

@@ -11,8 +11,9 @@ import {
 } from "@mui/material";
 import MainContainer from "../../../components/MainContainer";
 import ImeSafeTextField from "../../../components/ImeSafeTextField";
+import SideBar from "../../../components/Sidebar";
 
-export default function ReflectionCreateTable({ book, createReflection }) {
+export default function ReflectionCreateTable({ book, createReflection, chatId }) {
   /* =====================
      ref로 값 관리
   ====================== */
@@ -23,8 +24,6 @@ export default function ReflectionCreateTable({ book, createReflection }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-
     createReflection({
       subject: subjectRef.current.value,
       summary: summaryRef.current.value,
@@ -43,108 +42,111 @@ export default function ReflectionCreateTable({ book, createReflection }) {
   };
 
   return (
-    <MainContainer>
+    <MainContainer  sx={{ pt: "110px", pb: "0px", mb: 0, mt : 0, height: "100vh", overflow: "hidden", display: "flex", direction:"row", gap: 3  }}>
       {/* 헤더 */}
-      <Stack direction="row" justifyContent="space-between" mb={4}>
-        <Typography fontSize={28} fontWeight={700}>
-          최종 감상문 작성
+      <SideBar chatId={chatId} activeStep={2} />
+      <Stack direction="column" mb={1} width={"100%"}>
+        <Stack direction="row" justifyContent="space-between" mb={4}>
+          <Typography fontSize={28} fontWeight={700}>
+            최종 감상문 작성
+          </Typography>
+          <Button variant="outlined" 
+            onClick={handleSubmit}
+            sx={{
+              borderColor: 'var(--color-blue-200)',
+              color: 'var(--color-blue-500)',
+              backgroundColor: 'var(--color-blue-050)',
+              fontWeight: 700,
+              fontSize: 16,
+              borderRadius: '8px',
+              paddingX: "20px",
+              paddingY: "10px",
+              '&:hover': {
+              borderColor: 'var(--color-blue-200)',
+              backgroundColor: 'var(--color-blue-100)',
+                        },}}>
+            저장하기
+          </Button>
+        </Stack>
+
+        <Typography fontWeight={700} mb={2} fontSize={20} color="var(--color-gray-600)">
+          감상문 입력
         </Typography>
-        <Button variant="outlined" 
-          onClick={handleSubmit}
-          sx={{
-            borderColor: 'var(--color-blue-200)',
-            color: 'var(--color-blue-500)',
-            backgroundColor: 'var(--color-blue-050)',
-            fontWeight: 700,
-            fontSize: 16,
-            borderRadius: '8px',
-            paddingX: "20px",
-            paddingY: "10px",
-            '&:hover': {
-            borderColor: 'var(--color-blue-200)',
-            backgroundColor: 'var(--color-blue-100)',
-                      },}}>
-          저장하기
-        </Button>
+
+        <Paper variant="outlined">
+          <Table sx={{ tableLayout: "fixed", width: "100%", "& td": { fontSize: 18 } }}>
+            <TableBody>
+              <TableRow>
+                <TableCell align="center" sx={{ width: 125, bgcolor: "var(--color-gray-100)", fontWeight: 700 }}>
+                  제목
+                </TableCell>
+                <TableCell colSpan={3}>
+                  <Typography fontSize={18}>{book.title}</Typography>
+                </TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell align="center" sx={{ bgcolor: "var(--color-gray-100)", fontWeight: 700 }}>
+                  주제
+                </TableCell>
+                <TableCell colSpan={3}>
+                  <ImeSafeTextField
+                    fullWidth
+                    multiline
+                    ref={subjectRef}
+                    sx={noBorderTextField}
+                  />
+                </TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell align="center" sx={{ bgcolor: "var(--color-gray-100)", fontWeight: 700 }}>
+                  줄거리
+                </TableCell>
+                <TableCell colSpan={3}>
+                  <ImeSafeTextField
+                    fullWidth
+                    multiline
+                    rows={3}
+                    ref={summaryRef}
+                    sx={noBorderTextField}
+                  />
+                </TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell align="center" sx={{ bgcolor: "var(--color-gray-100)", fontWeight: 700 }}>
+                  느낀점
+                </TableCell>
+                <TableCell colSpan={3}>
+                  <ImeSafeTextField
+                    fullWidth
+                    multiline
+                    rows={4}
+                    ref={bookReviewRef}
+                    sx={noBorderTextField}
+                  />
+                </TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell align="center" sx={{ bgcolor: "var(--color-gray-100)", fontWeight: 700 }}>
+                  토론
+                </TableCell>
+                <TableCell colSpan={3}>
+                  <ImeSafeTextField
+                    fullWidth
+                    multiline
+                    rows={4}
+                    ref={debateReviewRef}
+                    sx={noBorderTextField}
+                  />
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </Paper>
       </Stack>
-
-      <Typography fontWeight={700} mb={2} fontSize={20} color="var(--color-gray-600)">
-        감상문 입력
-      </Typography>
-
-      <Paper variant="outlined">
-        <Table sx={{ tableLayout: "fixed", width: "100%", "& td": { fontSize: 18 } }}>
-          <TableBody>
-            <TableRow>
-              <TableCell align="center" sx={{ width: 125, bgcolor: "var(--color-gray-100)", fontWeight: 700 }}>
-                제목
-              </TableCell>
-              <TableCell colSpan={3}>
-                <Typography fontSize={18}>{book.title}</Typography>
-              </TableCell>
-            </TableRow>
-
-            <TableRow>
-              <TableCell align="center" sx={{ bgcolor: "var(--color-gray-100)", fontWeight: 700 }}>
-                주제
-              </TableCell>
-              <TableCell colSpan={3}>
-                <ImeSafeTextField
-                  fullWidth
-                  multiline
-                  ref={subjectRef}
-                  sx={noBorderTextField}
-                />
-              </TableCell>
-            </TableRow>
-
-            <TableRow>
-              <TableCell align="center" sx={{ bgcolor: "var(--color-gray-100)", fontWeight: 700 }}>
-                줄거리
-              </TableCell>
-              <TableCell colSpan={3}>
-                <ImeSafeTextField
-                  fullWidth
-                  multiline
-                  rows={3}
-                  ref={summaryRef}
-                  sx={noBorderTextField}
-                />
-              </TableCell>
-            </TableRow>
-
-            <TableRow>
-              <TableCell align="center" sx={{ bgcolor: "var(--color-gray-100)", fontWeight: 700 }}>
-                느낀점
-              </TableCell>
-              <TableCell colSpan={3}>
-                <ImeSafeTextField
-                  fullWidth
-                  multiline
-                  rows={4}
-                  ref={bookReviewRef}
-                  sx={noBorderTextField}
-                />
-              </TableCell>
-            </TableRow>
-
-            <TableRow>
-              <TableCell align="center" sx={{ bgcolor: "var(--color-gray-100)", fontWeight: 700 }}>
-                토론
-              </TableCell>
-              <TableCell colSpan={3}>
-                <ImeSafeTextField
-                  fullWidth
-                  multiline
-                  rows={4}
-                  ref={debateReviewRef}
-                  sx={noBorderTextField}
-                />
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </Paper>
     </MainContainer>
   );
 }

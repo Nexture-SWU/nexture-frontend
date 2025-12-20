@@ -73,13 +73,15 @@ function SideBar({chatId, activeStep}) {
     <Box 
       sx={{
         maxHeight: "80vh",
-        width: isCollapsed ? "56px" : "240px", // 🔥 핵심
-        padding: isCollapsed ? "0" : "0px 24px",
+        minWidth: isCollapsed ? "30px" : "240px", // 🔥 핵심
+        width: isCollapsed ? "30px" : "240px", // 🔥 핵심
+        padding: isCollapsed ? "10px 0px" : "0px 24px",
         pr: "8px",
         bgcolor: isCollapsed ? "var(--color-base-000)" : "var(--color-gray-100)",
+        mr: isCollapsed ? 0 : 2,
         borderRadius: 5,
-        transition: "width 0.25s ease, padding 0.25s ease",
-        mr: 3,
+        transition: "width 0.25s ease, padding 0.25s ease, min-width 0.25s ease, margin 0.25s ease",
+       
       }}>
 
         <Box 

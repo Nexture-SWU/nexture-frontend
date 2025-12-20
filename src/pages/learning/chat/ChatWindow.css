@@ -5,6 +5,7 @@
   justify-content: space-between; /* 입력창을 하단에 고정 */
   overflow-y: auto;
   padding-bottom: 80px; /* 입력창 공간 확보 */
+  position: relative;
 }
 
 /* 채팅 컨테이너 (정렬 변화의 핵심) */
@@ -12,7 +13,7 @@
   transition: margin 0.3s ease; /* 마진(정렬) 전환 애니메이션 */
   min-height: 100%; /* 최소 높이 설정 */
   width: 800px;
-
+  max-width: 1200px;
 }
 
 /* 채팅 버블 컨테이너 */
@@ -56,7 +57,7 @@
 /* ================== Chat Input 스타일 ================== */
 
 .chat-input-area {
-    position: fixed;
+    position: absolute;
     width: 100%;
     bottom: 40px;
     left: 0;

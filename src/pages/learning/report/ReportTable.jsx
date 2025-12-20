@@ -10,9 +10,10 @@ import {
   Paper,
 } from "@mui/material";
 import MainContainer from "../../../components/MainContainer";
+import SideBar from "../../../components/Sidebar";
 import { formatDateYMD, getCreateDate } from "../../../utils/date";
 
-export default function ReportTable({finalReport, reflection}) {
+export default function ReportTable({finalReport, reflection, chatId}) {
   const InfoTable = ({ rows }) => {
   let lastGroup = null;
 
@@ -97,154 +98,157 @@ export default function ReportTable({finalReport, reflection}) {
 
 
   return (
-    <MainContainer>
-      {/* 헤더 */}
-      <Stack direction="row" justifyContent="space-between" mb={4}>
-        <Typography fontSize={28} fontWeight={700} sx={{ mb: 1 }}>
-          {finalReport.title} <span style={{ color: "var(--color-gray-700)", fontSize: "24px" }}>- {finalReport.author}</span>
-        </Typography>
+    <MainContainer  sx={{ pt: "110px", pb: "0px", mb: 0, mt : 0, height: "100vh", overflow: "hidden", display: "flex", direction:"row", gap: 3  }}>
+      <SideBar chatId={chatId} activeStep={3} />
+      <Stack direction="column" mb={1} width={"100%"}>
+        {/* 헤더 */}
+        <Stack direction="row" justifyContent="space-between" mb={4}>
+          <Typography fontSize={28} fontWeight={700} sx={{ mb: 1 }}>
+            {finalReport.title} <span style={{ color: "var(--color-gray-700)", fontSize: "24px" }}>- {finalReport.author}</span>
+          </Typography>
 
-        <Stack direction="row" spacing={2}>
-          <Button variant="outlined" 
-          sx={{
-            borderColor: 'var(--color-blue-200)',
-            color: 'var(--color-blue-500)',
-            backgroundColor: 'var(--color-blue-050)',
-            fontWeight: 700,
-            fontSize: 16,
-            borderRadius: '8px',
-            paddingX: "20px",
-            paddingY: "10px",
-            '&:hover': {
-            borderColor: 'var(--color-blue-200)',
-            backgroundColor: 'var(--color-blue-100)',
-                      },}}>공유하기</Button>
-          <Button variant="outlined" 
-          sx={{
-            borderColor: 'var(--color-blue-200)',
-            color: 'var(--color-blue-500)',
-            backgroundColor: 'var(--color-blue-050)',
-            fontWeight: 700,
-            fontSize: 16,
-            borderRadius: '8px',
-            paddingX: "20px",
-            paddingY: "10px",
-            '&:hover': {
-            borderColor: 'var(--color-blue-200)',
-            backgroundColor: 'var(--color-blue-100)',
-                      },}}>내보내기</Button>
+          <Stack direction="row" spacing={2}>
+            <Button variant="outlined" 
+            sx={{
+              borderColor: 'var(--color-blue-200)',
+              color: 'var(--color-blue-500)',
+              backgroundColor: 'var(--color-blue-050)',
+              fontWeight: 700,
+              fontSize: 16,
+              borderRadius: '8px',
+              paddingX: "20px",
+              paddingY: "10px",
+              '&:hover': {
+              borderColor: 'var(--color-blue-200)',
+              backgroundColor: 'var(--color-blue-100)',
+                        },}}>공유하기</Button>
+            <Button variant="outlined" 
+            sx={{
+              borderColor: 'var(--color-blue-200)',
+              color: 'var(--color-blue-500)',
+              backgroundColor: 'var(--color-blue-050)',
+              fontWeight: 700,
+              fontSize: 16,
+              borderRadius: '8px',
+              paddingX: "20px",
+              paddingY: "10px",
+              '&:hover': {
+              borderColor: 'var(--color-blue-200)',
+              backgroundColor: 'var(--color-blue-100)',
+                        },}}>내보내기</Button>
+          </Stack>
         </Stack>
+
+        {/* 최종 보고서 */}
+        
+
+        <Paper variant="outlined" sx={{ mb: 4, mx: "24px", borderColor: "transparent" }}>
+          <Typography fontWeight={700} mb={2} fontSize={20} color={"var(--color-gray-600)"}>
+              최종 보고서
+          </Typography>
+          <Paper variant="outlined" sx={{ mb: 6 }}>
+              <InfoTable
+              rows={[
+                  {
+                  label: "제목",
+                  value: `${finalReport.title}`,
+                  extra: { label: "저자", value: `${finalReport.author}` },
+                  },
+                  {
+                  label: "날짜",
+                  value: `${formatDateYMD(getCreateDate(finalReport.created_at))}`,
+                  extra: { label: "분야", value: "문학" },
+                  },
+                  {
+                  label: "주제",
+                  value: `${finalReport.subject}`,
+                  colSpan: 3,
+                  },
+                  {
+                  label: "줄거리",
+                  value: `${finalReport.gold_summary}`,
+                  colSpan: 3,
+                  },
+                  {
+                  label: "총점",
+                  group: "평가기준",
+                  value: (
+                      <>
+                      <Typography fontWeight={700}>{finalReport.expression + finalReport.logical_thinking + finalReport.manner + finalReport.summary_accuracy}점</Typography>
+                      <Typography fontSize={16} color="text.secondary">
+                          {finalReport.reason}
+                      </Typography>
+                      </>
+                  ),
+                  colSpan: 3,
+                  },
+                  {
+                      label: "표현력",
+                      group: "평가기준",
+                      value: `${finalReport.expression}점 / 5점`,
+                      colSpan: 3,
+                  },
+                  {
+                      label: "사고력",
+                      group: "평가기준",
+                      value: `${finalReport.logical_thinking}점 / 5점`,
+                      colSpan: 3,
+                  },
+                  {
+                      label: "학습 태도",
+                      group: "평가기준",
+                      value: `${finalReport.manner}점 / 5점`,
+                      colSpan: 3,
+                  },
+                  {
+                      label: "요약 능력",
+                      group: "평가기준",
+                      value: `${finalReport.summary_accuracy}점 / 5점`,
+                      colSpan: 3,
+                  },
+
+              ]}
+              />
+          </Paper>
+        
+
+          {/* 최종 감상문 */}
+          <Typography fontWeight={700} mb={2} fontSize={20} color={"var(--color-gray-600)"}>
+              최종 감상문
+          </Typography>
+          <Paper variant="outlined">
+              <InfoTable
+              rows={[
+                  {
+                  label: "제목",
+                  value: `${reflection.title}`,
+                  extra: { label: "저자", value: `${reflection.author}` },
+                  },
+                  {
+                  label: "날짜",
+                  value: `${formatDateYMD(getCreateDate(reflection.created_at))}`,
+                  extra: { label: "분야", value: "문학" },
+                  },
+                  {
+                  label: "주제",
+                  value: `${reflection.subject}`,
+                  colSpan: 3,
+                  },
+                  {
+                  label: "줄거리",
+                  value: `${reflection.summary}`,
+                  colSpan: 3,
+                  },
+                  {
+                  label: "느낀점",
+                  value: `${reflection.book_review}`,
+                  extra: { label: "토론", value: `${reflection.debate_review}` },
+                  },
+              ]}
+              />
+          </Paper>
+        </Paper>
       </Stack>
-
-      {/* 최종 보고서 */}
-      
-
-      <Paper variant="outlined" sx={{ mb: 4, mx: "24px", borderColor: "transparent" }}>
-        <Typography fontWeight={700} mb={2} fontSize={20} color={"var(--color-gray-600)"}>
-            최종 보고서
-        </Typography>
-        <Paper variant="outlined" sx={{ mb: 6 }}>
-            <InfoTable
-            rows={[
-                {
-                label: "제목",
-                value: `${finalReport.title}`,
-                extra: { label: "저자", value: `${finalReport.author}` },
-                },
-                {
-                label: "날짜",
-                value: `${formatDateYMD(getCreateDate(finalReport.created_at))}`,
-                extra: { label: "분야", value: "문학" },
-                },
-                {
-                label: "주제",
-                value: `${finalReport.subject}`,
-                colSpan: 3,
-                },
-                {
-                label: "줄거리",
-                value: `${finalReport.gold_summary}`,
-                colSpan: 3,
-                },
-                {
-                label: "총점",
-                group: "평가기준",
-                value: (
-                    <>
-                    <Typography fontWeight={700}>{finalReport.expression + finalReport.logical_thinking + finalReport.manner + finalReport.summary_accuracy}점</Typography>
-                    <Typography fontSize={16} color="text.secondary">
-                        {finalReport.reason}
-                    </Typography>
-                    </>
-                ),
-                colSpan: 3,
-                },
-                {
-                    label: "표현력",
-                    group: "평가기준",
-                    value: `${finalReport.expression}점 / 5점`,
-                    colSpan: 3,
-                },
-                {
-                    label: "사고력",
-                    group: "평가기준",
-                    value: `${finalReport.logical_thinking}점 / 5점`,
-                    colSpan: 3,
-                },
-                {
-                    label: "학습 태도",
-                    group: "평가기준",
-                    value: `${finalReport.manner}점 / 5점`,
-                    colSpan: 3,
-                },
-                {
-                    label: "요약 능력",
-                    group: "평가기준",
-                    value: `${finalReport.summary_accuracy}점 / 5점`,
-                    colSpan: 3,
-                },
-
-            ]}
-            />
-        </Paper>
-      
-
-        {/* 최종 감상문 */}
-        <Typography fontWeight={700} mb={2} fontSize={20} color={"var(--color-gray-600)"}>
-            최종 감상문
-        </Typography>
-        <Paper variant="outlined">
-            <InfoTable
-            rows={[
-                {
-                label: "제목",
-                value: `${reflection.title}`,
-                extra: { label: "저자", value: `${reflection.author}` },
-                },
-                {
-                label: "날짜",
-                value: `${formatDateYMD(getCreateDate(reflection.created_at))}`,
-                extra: { label: "분야", value: "문학" },
-                },
-                {
-                label: "주제",
-                value: `${reflection.subject}`,
-                colSpan: 3,
-                },
-                {
-                label: "줄거리",
-                value: `${reflection.summary}`,
-                colSpan: 3,
-                },
-                {
-                label: "느낀점",
-                value: `${reflection.book_review}`,
-                extra: { label: "토론", value: `${reflection.debate_review}` },
-                },
-            ]}
-            />
-        </Paper>
-      </Paper>
     </MainContainer>
   );
 }
