@@ -2,16 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@mui/material';
 import "./ChatWindow.css";
 import MainContainer from "../../../components/MainContainer";
+import SideBar from '../../../components/Sidebar';
 
-function ChatWindow({ isSidebarOpen, handleSend, preChat, navigate, chatId }) {
+function ChatWindow({ handleSend, preChat, navigate, chatId }) {
   const [messages, setMessages] = useState([]);
   const [isChatDone, setIsChatDone] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const bottomRef = useRef(null);
 
   const chatWrapperStyle = {
-    margin: isSidebarOpen ? '0 0 0 40px' : '0 auto',
-    maxWidth: '800px',
+    margin: '0 auto',
     width: '100%',
     padding: '20px 0',
   };
@@ -96,7 +96,8 @@ function ChatWindow({ isSidebarOpen, handleSend, preChat, navigate, chatId }) {
   
 
   return (
-    <MainContainer>
+    <MainContainer sx={{ display: 'flex', direction: 'row', px: 0,  pt: '110px', my: 0, gap: 3, height: "100vh", overflow: "hidden"  }}>
+      <SideBar chatId={chatId} activeStep={1} />
       <div className="chat-window">
         <div className="chat-content-wrapper" style={chatWrapperStyle}>
           {messages.map(msg => (

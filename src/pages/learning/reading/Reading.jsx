@@ -32,14 +32,15 @@ function Reading() {
         backgroundColor: "var(--background-color)",
         height: "auto",
         padding: "0",
+        overflowY: "hidden"
       }}
     >
       <NavbarComponent />
       {loading && <LoadingScreen />}
 
-      {!loading && <MainContainer sx={{ mt: "108px", mb: "40px" }}>
-        <Box sx={{ height: "100%", display: "flex" }}>
-          {/* <SideBar /> */}
+      {!loading && <MainContainer sx={{ pt: "110px", pb: "0px", mb: 0, mt : 0, height: "100vh", overflow: "hidden",  }}>
+        <Box sx={{ display: "flex", direction: "row" }}>
+          <SideBar chatId={chatId} activeStep={0} />
           <Content book={book} chatId={chatId} />
         </Box>        
       </MainContainer>}

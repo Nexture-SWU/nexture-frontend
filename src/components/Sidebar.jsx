@@ -1,19 +1,34 @@
 import { Box, Typography, Collapse } from "@mui/material";
+import { useReading } from '../hooks/useReading';
+import { useGetChatList } from '../hooks/useGetChatList';
 import { useState } from "react";
 
-function SideBar(){  
-  const [listOpen, setListOpen] = useState(true);
+function SideBar({chatId, activeStep}) {  
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const {
+    book
+  } = useReading(chatId);
+  const {
+    chatList,
+  } = useGetChatList(chatId);
+  console.log("chatList in Sidebar:", chatList);
+
+  const activeChat = chatList.filter(chat => chat.chat_id === chatId)[0];
+  const recentChat = chatList.filter(chat => chat.chat_id !== chatId).slice(-3);
 
   const Section = ({title, children, collapsible = false, open, onToggle}) => (
 
-    <Box sx={{ mb: 5 }}>
+    <Box sx={{ 
+      mb: 5 
+      }}>
       {title &&(
         <Box
           onClick={collapsible ? onToggle : undefined}
           sx={{
             cursor: collapsible ? "pointer" : "default"
           }}>
-            <Typography variant="h6" fontWeight={700} fontSize={"20px"} lineHeight={"30px"}
+            <Typography variant="h6" fontWeight={700} fontSize={"18px"} lineHeight={"30px"}
               sx={{ mb: 1 }}>
               {title}
             </Typography>
@@ -40,7 +55,7 @@ function SideBar(){
         padding: "8px",
         mr: "16px",
         paddingLeft: indent ? "24px" : "8px",
-        fontSize: "18px",
+        fontSize: "16px",
         lineHeight: "28px",
         fontWeight : active ? 700 : 400,
         borderRadius: 1,
@@ -57,11 +72,14 @@ function SideBar(){
   return (       
     <Box 
       sx={{
-        width: "240px",
-        padding: "40px 24px",
+        maxHeight: "80vh",
+        width: isCollapsed ? "56px" : "240px", // 🔥 핵심
+        padding: isCollapsed ? "0" : "0px 24px",
         pr: "8px",
-        bgcolor: "var(--color-gray-100)",
+        bgcolor: isCollapsed ? "var(--color-base-000)" : "var(--color-gray-100)",
         borderRadius: 5,
+        transition: "width 0.25s ease, padding 0.25s ease",
+        mr: 3,
       }}>
 
         <Box 
@@ -95,48 +113,48 @@ function SideBar(){
             }
         }}>
 
-          {/* 상단 */}
-          <Box sx={{ mb: 5 }}>
-            <Typography variant="h6" fontWeight={700} fontSize={"20px"} lineHeight={"30px"}
-              sx={{ mb: "4px" }}>
-              『책 제목』
-            </Typography>
-            <Typography variant="body2" fontWeight={400} fontSize={"14px"} lineHeight={"22px"}>
-              - 진행 중인 파트명
-            </Typography>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", px: isCollapsed ?"0px":"24px", pt: isCollapsed ?"0px":"24px", mb: 2, transition: "padding 0.25s ease",}}>
+              <Box
+              component="img"
+              src={`${process.env.PUBLIC_URL}/images/icons/dock_to_right.svg`}
+              alt=""
+              sx={{ width: 18, height: 18 }}
+              onClick={() => setIsCollapsed(prev => !prev)}
+              />
           </Box>
 
-          {/* 목록 */}
-          <Section 
-            title="목록" 
-            collapsible
-            open={listOpen}
-            onToggle={()=> setListOpen(prev => !prev)}
-          >
-            <MenuItem>1주차(00.00 - 00)</MenuItem>
-            <MenuItem>2주차(00.00 - 00)</MenuItem>
-            <MenuItem active>3주차(00.00 - 00)</MenuItem>
-          </Section>
+          {/* 상단 */}
+          {!isCollapsed && (<Box sx={{ mb: 5 }}>
+            <Typography variant="h6" fontWeight={700} fontSize={"20px"} lineHeight={"30px"}
+              sx={{ mb: "4px" }}>
+              {book?.title}
+            </Typography>
+            <Typography variant="body2" fontWeight={400} fontSize={"14px"} lineHeight={"22px"}>
+              {book?.author}
+            </Typography>
+          </Box>)}
 
           {/* 독서 토론 */}
-          <Section title="독서 토론">
-            <MenuItem active>줄거리</MenuItem>
-            <MenuItem>대화하기</MenuItem>
-            <MenuItem indent>첫 번째 질문</MenuItem>
-            <MenuItem indent>두 번째 질문</MenuItem>
-            <MenuItem indent>세 번째 질문</MenuItem>
-          </Section>
+          {!isCollapsed && recentChat.length > 0 && (<Section title="최근 학습 기록">
+            {recentChat.map((chat) => (
+              <MenuItem key={chat.chat_id}>{chat.title}</MenuItem>
+            ))}
+          </Section>)}
+
+          {/* 독서 토론 */}
+          {!isCollapsed && (<Section title="독서 토론">
+            <MenuItem active={activeStep === 0} >책 읽기</MenuItem>
+            <MenuItem active={activeStep === 1}>토론 하기</MenuItem>
+          </Section>)}
 
           {/* 감상문 */}
-          <Section title="감상문 쓰기">
-            <MenuItem>줄거리</MenuItem>
-            <MenuItem>느낀점</MenuItem>
-            <MenuItem>토론 소감</MenuItem>
-          </Section>
+          {!isCollapsed && (<Section title="감상문 쓰기">
+            <MenuItem active={activeStep === 2}>감상문 쓰기</MenuItem>
+          </Section>)}
 
-          <Section title="">
-            <MenuItem>보고서 확인</MenuItem>
-          </Section>
+          {!isCollapsed && (<Section title="평가 보고서">
+            <MenuItem active={activeStep === 3}>보고서 확인</MenuItem>
+          </Section>)}
         </Box>
     </Box>
   );
