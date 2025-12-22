@@ -159,7 +159,7 @@ const Learning = () => {
                         maxHeight: "56px",
                       }}
                     >
-                      {stepData.title}
+                      {stepKey.replace(/step(\d+)/i, '$1단계')}
                     </Typography>
                   </Box>
 
