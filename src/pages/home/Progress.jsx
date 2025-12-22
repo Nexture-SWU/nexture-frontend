@@ -45,6 +45,7 @@ export default function Progress({ user, onNavigate }) {
     chatList,
     curriculumList,
     finalReportList,
+    totalReport,
     loading,
     error,
   } = useProgress(user);
@@ -317,14 +318,14 @@ export default function Progress({ user, onNavigate }) {
               좋았어요!
             </Typography>
             <Typography sx={{ marginBottom: "32px", fontSize: "18px", fontWeight: 400,  color: "var(--color-gray-800)" }}>
-              지난 활동의 결과물을 텍스트 형태로 평가합니다.
+              {totalReport?.pros}
             </Typography>
 
             <Typography mb={1} fontWeight={700} fontSize={"20px"} color="var(--color-blue-900)">
               아쉬웠어요!
             </Typography>
             <Typography sx={{ mb: 4, fontSize: "18px", fontWeight: 400, color: "var(--color-gray-800)" }}>
-              부족한 점을 중심으로 구체적으로 작성합니다.
+              {totalReport?.cons}
             </Typography>
             <Typography className="body-14-regular" sx={{color: "var(--color-gray-500)"}}>
               *지난 4주간의 활동을 종합적으로 평가한 결과예요.

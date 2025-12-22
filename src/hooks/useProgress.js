@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { creatChatId, getChatList } from "../api/chat";
-import { getFinalReportList } from "../api/report";
+import { getFinalReportList, createTotalReport } from "../api/report";
 import { getCurriculumList } from "../api/curriculum";
 
 export function useProgress(user) {
   const [chatList, setChatList] = useState([]);
   const [curriculumList, setCurriculumList] = useState([]);
   const [finalReportList, setFinalReportList] = useState([]);
+  const [totalReport, setTotalReport] = useState("")
 
   const [loading, setLoading] = useState(true);
 
@@ -30,10 +31,12 @@ export function useProgress(user) {
       const chats = await safeCall(() => getChatList());
       const curriculums = await safeCall(() => getCurriculumList());
       const finalReports = await safeCall(() => getFinalReportList());
+      const totalReportTmp = await safeCall(() => createTotalReport());
 
       setChatList(chats["chats"]||[]);
       setCurriculumList(curriculums["curriculums"]||[]);
       setFinalReportList(finalReports["final_reports"]||[]);
+      setTotalReport(totalReportTmp["total_report"]||"")
 
       let tmp = chats["chats"]||[]
       if (tmp.length === 0) {
@@ -52,6 +55,7 @@ export function useProgress(user) {
     chatList,
     curriculumList,
     finalReportList,
+    totalReport,
     loading,
   };
 }
