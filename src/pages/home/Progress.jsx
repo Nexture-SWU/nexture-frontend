@@ -63,7 +63,7 @@ export default function Progress({ user, onNavigate }) {
     summary_accuracy: 90,
   };
   const scoreSum =
-    reports.length <= 5
+    reports.length <= 2
       ? DEFAULT_SCORES
       : reports.reduce(
         (acc, report) => {
@@ -281,7 +281,7 @@ export default function Progress({ user, onNavigate }) {
         bgcolor: "var(--color-base-000)"
       }}
       >
-        {finalReportList.length < 4 && (
+        {finalReportList.length < 1 && (
           <Box
             sx={{
               position: "absolute",
