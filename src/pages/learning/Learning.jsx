@@ -99,7 +99,7 @@ const Learning = () => {
     >
       <NavbarComponent />
       {loading && <LoadingScreen />}
-      <MainContainer sx={{ height: "70vh" }}>
+      <MainContainer sx={{ height: "auto", mt: 0, pt: "100px", pb: "40px" }}>
         <Typography
           variant="h1"
           fontWeight={700}
