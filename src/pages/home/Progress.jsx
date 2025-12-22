@@ -57,13 +57,13 @@ export default function Progress({ user, onNavigate }) {
 
   const reports = finalReportList.slice(0, 4);
   const DEFAULT_SCORES = {
-    expression: 67,
-    logical_thinking: 78,
-    manner: 85,
-    summary_accuracy: 90,
+    expression: 0,
+    logical_thinking: 0,
+    manner: 0,
+    summary_accuracy: 0,
   };
   const scoreSum =
-    reports.length <= 2
+    reports.length < 1
       ? DEFAULT_SCORES
       : reports.reduce(
         (acc, report) => {
@@ -86,10 +86,10 @@ export default function Progress({ user, onNavigate }) {
     datasets: [
       {
         data: [
-          scoreSum.expression,
-          scoreSum.logical_thinking,
-          scoreSum.manner,
-          scoreSum.summary_accuracy,
+          scoreSum.expression*20,
+          scoreSum.logical_thinking*20,
+          scoreSum.manner*20,
+          scoreSum.summary_accuracy*20,
         ], // 점수
         backgroundColor: "rgba(58, 152, 245, 0.4)", // 내부 채움: --color-blue-400
         borderColor: "rgb(58, 152, 245)", // 외곽선: --color-blue-400
