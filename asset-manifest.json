@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/nexture-frontend/static/css/main.258031ec.css",
-    "main.js": "/nexture-frontend/static/js/main.f15ec608.js",
-    "static/js/488.299368d0.chunk.js": "/nexture-frontend/static/js/488.299368d0.chunk.js",
+    "main.js": "/nexture-frontend/static/js/main.a3e7d6c1.js",
+    "static/js/488.6a1d2597.chunk.js": "/nexture-frontend/static/js/488.6a1d2597.chunk.js",
     "static/media/Pretendard-Black.woff": "/nexture-frontend/static/media/Pretendard-Black.c51355ddc1caec596031.woff",
     "static/media/Pretendard-ExtraBold.woff": "/nexture-frontend/static/media/Pretendard-ExtraBold.f6491e200d1fb5c5917b.woff",
     "static/media/Pretendard-Bold.woff": "/nexture-frontend/static/media/Pretendard-Bold.1f1dbbbf311ffffcc770.woff",
@@ -23,11 +23,11 @@
     "static/media/Pretendard-Thin.woff2": "/nexture-frontend/static/media/Pretendard-Thin.bb7cedf4446fa24dda9d.woff2",
     "index.html": "/nexture-frontend/index.html",
     "main.258031ec.css.map": "/nexture-frontend/static/css/main.258031ec.css.map",
-    "main.f15ec608.js.map": "/nexture-frontend/static/js/main.f15ec608.js.map",
-    "488.299368d0.chunk.js.map": "/nexture-frontend/static/js/488.299368d0.chunk.js.map"
+    "main.a3e7d6c1.js.map": "/nexture-frontend/static/js/main.a3e7d6c1.js.map",
+    "488.6a1d2597.chunk.js.map": "/nexture-frontend/static/js/488.6a1d2597.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.258031ec.css",
-    "static/js/main.f15ec608.js"
+    "static/js/main.a3e7d6c1.js"
   ]
 }
