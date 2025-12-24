@@ -14,6 +14,7 @@ import { useReading } from '../../../hooks/useReading';
 import LoadingScreen from '../../../components/LoadingScreen';
 import MainContainer from "../../../components/MainContainer";
 import SideBar from "../../../components/Sidebar"
+import FloatingChat from "../../../components/FloatingChat"
 
 // 변수 받아와서 버튼 전환
 function Reading() {
@@ -35,14 +36,14 @@ function Reading() {
         overflowY: "hidden"
       }}
     >
+      <FloatingChat chatId={chatId} />   
       <NavbarComponent />
       {loading && <LoadingScreen />}
-
       {!loading && <MainContainer sx={{ pt: "110px", pb: "0px", mb: 0, mt : 0, height: "100vh", overflow: "hidden",  }}>
         <Box sx={{ display: "flex", direction: "row" }}>
           <SideBar chatId={chatId} activeStep={0} />
           <Content book={book} chatId={chatId} />
-        </Box>        
+        </Box>     
       </MainContainer>}
     </Container>
   );
