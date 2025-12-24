@@ -33,7 +33,7 @@ const ArticleDetail = () => {
             padding: "16px 400px",
             display: "flex",
             flexDirection: "column",
-            gap: 2
+            gap: 5
            }}
         >
           {/* 제목 및 저자 */}
@@ -52,11 +52,11 @@ const ArticleDetail = () => {
           <img 
             src={article.thumbnail}
             alt={article.title}
-            style={{ width: "100%", borderRadius: "16px", marginBottom: "16px" }}
+            style={{ width: "100%", borderRadius: "16px", mt: 4, mb: 2 }}
           />
 
            {/* 내용 */}
-            <Typography variant="body2" fontWeight={400} fontSize="18px" lineHeight="28px" color="var(--color-gray-700)"
+            <Typography variant="body2" fontWeight={400} fontSize="18px" lineHeight="28px" color="var(--color-gray-700)" whiteSpace={"pre-line"}
               sx={{ mb: 1 }}>
               {article.contents}
             </Typography>
