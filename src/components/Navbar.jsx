@@ -50,6 +50,7 @@ const Navbar = () => {
     removeRefreshToken()
     removeItem("user")
     navigate(PATH.MAIN)
+    window.location.reload()
   };
 
   useEffect(() => {
