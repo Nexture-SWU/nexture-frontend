@@ -170,7 +170,7 @@ export default function Progress({ user, onNavigate }) {
             {chatList.length > 0 ? 
             <Stack direction={"row"} spacing={0} sx={{ mt: "10px", mb: 2 }}>
               <Chip 
-                label={`${Math.ceil((getExpiredDate(chatList[0].created_at) - new Date())/(1000 * 60 * 60 * 24))}일 남았어요`} 
+                label={Math.ceil((getExpiredDate(chatList[0].created_at) - new Date())/(1000 * 60 * 60 * 24))>0?`${Math.ceil((getExpiredDate(chatList[0].created_at) - new Date())/(1000 * 60 * 60 * 24))}일 남았어요`: Math.ceil((getExpiredDate(chatList[0].created_at) - new Date())/(1000 * 60 * 60 * 24)) === 0? "하루 남았어요.": `${Math.ceil((getExpiredDate(chatList[0].created_at) - new Date())/(1000 * 60 * 60 * 24))*-1}일 지났어요`} 
                 sx={{
                   bgcolor: "var(--color-blue-700)",
                   color: "var(--color-base-000)",
@@ -442,7 +442,7 @@ export default function Progress({ user, onNavigate }) {
                       },
                     }}
                   >
-                    {chat.has_final_report ? "수강완료" : getExpiredDate(getCreateDate(chat.created_at)) < new Date() ? "수강불가" : "수강하기"}
+                    {chat.has_final_report ? "수강완료" : "수강하기"}
                   </Button>
                 </TableCell>
               </TableRow>
