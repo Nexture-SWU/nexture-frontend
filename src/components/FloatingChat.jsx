@@ -4,7 +4,7 @@ import useDraggable from "../hooks/useDraggable"
 function FloatingChat({ chatId }) {
   const [open, setOpen] = useState(false);
 
-  const { position, onMouseDown } = useDraggable({
+  const { position, onMouseDown, wasDragged  } = useDraggable({
     x: window.innerWidth - 80,
     y: window.innerHeight - 140,
   });
@@ -33,7 +33,14 @@ function FloatingChat({ chatId }) {
       {/* Floating Button */}
       <div
         onMouseDown={onMouseDown}
-        onClick={() => setOpen(prev => !prev)}
+        onClick={(e) => {
+                if (wasDragged.current) {
+                e.preventDefault();
+                e.stopPropagation();
+                return;
+                }
+                setOpen(prev => !prev);
+                }}
         style={{
           position: "fixed",
           left: position.x,
