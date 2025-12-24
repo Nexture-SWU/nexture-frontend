@@ -47,7 +47,6 @@ export default function Progress({ user, onNavigate }) {
     finalReportList,
     totalReport,
     loading,
-    error,
   } = useProgress(user);
   const totalPages = Math.ceil(chatList.length / ROWS_PER_PAGE);
   const paginatedChats = chatList.slice(
