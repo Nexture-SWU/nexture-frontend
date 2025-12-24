@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Stack,
   Typography,
@@ -98,7 +97,7 @@ export default function ReportTable({finalReport, reflection, chatId}) {
 
 
   return (
-    <MainContainer  sx={{ pt: "110px", pb: "0px", mb: 0, mt : 0, height: "100vh", overflow: "hidden", display: "flex", direction:"row", gap: 3  }}>
+    <MainContainer  sx={{ pt: "110px", pb: "0px", mb: 0, mt : 0, minHeight: "100vh", overflow: "hidden", display: "flex", direction:"row", gap: 3  }}>
       <SideBar chatId={chatId} activeStep={3} />
       <Stack direction="column" mb={1} width={"100%"}>
         {/* 헤더 */}
