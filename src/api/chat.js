@@ -29,6 +29,22 @@ export async function sendMessage(chatId, message) {
   }
 }
 
+export async function sendAssistantMessage(chatId, message) {
+  try {
+    console.log("sendAssistantMessage 요청중");
+    const response = await fastapiApi.post(`api/assistant/${chatId}/message`, {
+      message: message,
+    });
+    const data = response.data;
+    console.log("sendAssistantMessage 성공:", data);
+    return data;
+
+  } catch (error) {
+    console.warn("sendAssistantMessage 실패:", error.response || error);
+    return null;
+  }
+}
+
 export async function getChat(chatId) {
   try {
     console.log("getChat 요청중");

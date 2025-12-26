@@ -1,8 +1,10 @@
-import { useState, useRef, useEffect  } from "react";
+import { useState } from "react";
 import useDraggable from "../hooks/useDraggable"
+import { useAssistantChat } from "../hooks/useAssistantChat"
 
 function FloatingChat({ chatId }) {
   const [open, setOpen] = useState(false);
+  const { sendUserMessage } = useAssistantChat(chatId)
 
   const { position, onMouseDown, wasDragged  } = useDraggable({
     x: window.innerWidth - 80,
@@ -19,13 +21,17 @@ function FloatingChat({ chatId }) {
   aiMessages.length > userMessages.length;
 
   /* 유저 전송 */
-  const onSend = () => {
+  const onSend = async () => {
     if (!input.trim()) return;
 
         setUserMessages(prev => [...prev, input]);
         setInput("");
-
-        // 나중에 여기에 AI 응답 추가
+        try {
+          const reply = await sendUserMessage(input);
+          setAiMessages(prev => [...prev, reply]);
+        } catch (e) {
+          setAiMessages(prev => [...prev, "응답 중 오류가 발생했어요."]);
+        }
     };
 
   return (
