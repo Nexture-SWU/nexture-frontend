@@ -49,7 +49,8 @@ const Navbar = () => {
     removeAccessToken()
     removeRefreshToken()
     removeItem("user")
-    window.location.href = PATH.MAIN
+    navigate(PATH.MAIN)
+    window.location.reload()
   };
 
   useEffect(() => {

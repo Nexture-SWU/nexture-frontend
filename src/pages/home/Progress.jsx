@@ -47,7 +47,6 @@ export default function Progress({ user, onNavigate }) {
     finalReportList,
     totalReport,
     loading,
-    error,
   } = useProgress(user);
   const totalPages = Math.ceil(chatList.length / ROWS_PER_PAGE);
   const paginatedChats = chatList.slice(
@@ -82,7 +81,7 @@ export default function Progress({ user, onNavigate }) {
     );
 
   const data = {
-    labels: ["표현력", "사고력", "학습 태도", "요약 능력"],
+    labels: ["표현력", "사고력", "학습 태도", "요약력"],
     datasets: [
       {
         data: [
@@ -171,7 +170,7 @@ export default function Progress({ user, onNavigate }) {
             {chatList.length > 0 ? 
             <Stack direction={"row"} spacing={0} sx={{ mt: "10px", mb: 2 }}>
               <Chip 
-                label={`${Math.ceil((getExpiredDate(chatList[0].created_at) - new Date())/(1000 * 60 * 60 * 24))}일 남았어요`} 
+                label={Math.ceil((getExpiredDate(chatList[0].created_at) - new Date())/(1000 * 60 * 60 * 24))>0?`${Math.ceil((getExpiredDate(chatList[0].created_at) - new Date())/(1000 * 60 * 60 * 24))}일 남았어요`: Math.ceil((getExpiredDate(chatList[0].created_at) - new Date())/(1000 * 60 * 60 * 24)) === 0? "하루 남았어요.": `${Math.ceil((getExpiredDate(chatList[0].created_at) - new Date())/(1000 * 60 * 60 * 24))*-1}일 지났어요`} 
                 sx={{
                   bgcolor: "var(--color-blue-700)",
                   color: "var(--color-base-000)",
@@ -281,34 +280,24 @@ export default function Progress({ user, onNavigate }) {
         bgcolor: "var(--color-base-000)"
       }}
       >
-        {finalReportList.length < 1 && (
-          <Box
-            sx={{
-              position: "absolute",
-              inset: 0,
-              zIndex: 10,
-              borderRadius: 3, 
-              bgcolor: "rgba(0, 0, 0, 0.55)",
-              backdropFilter: "blur(6px)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              textAlign: "center",
-              px: 3,
-            }}
-          >
-            <Typography
-              fontSize="20px"
-              fontWeight={700}
-              color="var(--color-base-000)"
-              lineHeight={1.6}
-            >
-              2주 이상 학습을 완료하면<br />
-              종합 평가를 확인할 수 있어요
-            </Typography>
-          </Box>
-        )}
+        
         <Stack direction="row" spacing={3} justifyContent="space-between" height={"fit-content"}>
+          {finalReportList.length < 1?
+          <Box sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}>
+            <Typography mb={1} fontWeight={700} fontSize={"20px"} color="var(--color-blue-900)">
+              아직 공개된 종합평가가 없어요.
+            </Typography>
+            <Typography sx={{ mb: 4, fontSize: "18px", fontWeight: 400, color: "var(--color-gray-800)" }}>
+              학습을 완료하면 종합평가를 확인할 수 있어요.
+            </Typography>
+            <Typography className="body-14-regular" sx={{color: "var(--color-gray-500)"}}>
+              *새로운 학습 결과가 생길 때마다 종합 평가가 변경돼요.
+            </Typography>
+          </Box>:
           <Box sx={{
             display: "flex",
             flexDirection: "column",
@@ -330,8 +319,35 @@ export default function Progress({ user, onNavigate }) {
             <Typography className="body-14-regular" sx={{color: "var(--color-gray-500)"}}>
               *지난 4주간의 활동을 종합적으로 평가한 결과예요.
             </Typography>
-          </Box>
-          <Box sx={{ width: 496, height: 344, px: "70px", py: "12px", borderRadius: "7px", bgcolor: "var(--color-gray-050)" }}>
+          </Box>}
+          <Box sx={{ position: "relative", width: 496, height: 344, px: "70px", py: "12px", borderRadius: "7px", bgcolor: "var(--color-gray-050)" }}>
+            {finalReportList.length < 1 && (
+            <Box
+              sx={{
+                width: "100%",
+                height: "100%",
+                position: "absolute",
+                inset: 0,
+                zIndex: 10,
+                borderRadius: 3, 
+                bgcolor: "transparent",
+                backdropFilter: "blur(2px)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                px: 0,
+              }}
+            >
+              <Typography
+                fontSize="60px"
+                fontWeight={800}
+                color="var(--color-gray-700)"
+                lineHeight={0}
+              >?
+              </Typography>
+            </Box>
+          )}
             <Radar data={data} options={options} />
           </Box>
         </Stack>
@@ -426,7 +442,7 @@ export default function Progress({ user, onNavigate }) {
                       },
                     }}
                   >
-                    {chat.has_final_report ? "수강완료" : getExpiredDate(getCreateDate(chat.created_at)) < new Date() ? "수강불가" : "수강하기"}
+                    {chat.has_final_report ? "수강완료" : "수강하기"}
                   </Button>
                 </TableCell>
               </TableRow>

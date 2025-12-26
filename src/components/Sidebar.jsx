@@ -1,6 +1,5 @@
 import { Box, Typography, Collapse } from "@mui/material";
 import { useReading } from '../hooks/useReading';
-import { useGetChatList } from '../hooks/useGetChatList';
 import { useState } from "react";
 
 function SideBar({chatId, activeStep}) {  
@@ -9,13 +8,6 @@ function SideBar({chatId, activeStep}) {
   const {
     book
   } = useReading(chatId);
-  const {
-    chatList,
-  } = useGetChatList(chatId);
-  console.log("chatList in Sidebar:", chatList);
-
-  const activeChat = chatList.filter(chat => chat.chat_id === chatId)[0];
-  const recentChat = chatList.filter(chat => chat.chat_id !== chatId).slice(-3);
 
   const Section = ({title, children, collapsible = false, open, onToggle}) => (
 
@@ -135,13 +127,6 @@ function SideBar({chatId, activeStep}) {
               {book?.author}
             </Typography>
           </Box>)}
-
-          {/* 독서 토론 */}
-          {!isCollapsed && recentChat.length > 0 && (<Section title="최근 학습 기록">
-            {recentChat.map((chat) => (
-              <MenuItem key={chat.chat_id}>{chat.title}</MenuItem>
-            ))}
-          </Section>)}
 
           {/* 독서 토론 */}
           {!isCollapsed && (<Section title="독서 토론">
