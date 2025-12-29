@@ -85,10 +85,10 @@ export default function Progress({ user, onNavigate }) {
     datasets: [
       {
         data: [
-          scoreSum.expression*20,
-          scoreSum.logical_thinking*20,
-          scoreSum.manner*20,
-          scoreSum.summary_accuracy*20,
+          scoreSum.expression*20/reports.length,
+          scoreSum.logical_thinking*20/reports.length,
+          scoreSum.manner*20/reports.length,
+          scoreSum.summary_accuracy*20/reports.length,
         ], // 점수
         backgroundColor: "rgba(58, 152, 245, 0.4)", // 내부 채움: --color-blue-400
         borderColor: "rgb(58, 152, 245)", // 외곽선: --color-blue-400
